@@ -1,18 +1,19 @@
 function calcola(){
-    let cognome = document.getElementById("cognome").value;
-    let nome = document.getElementById("nome").value;
-    let luogo = document.getElementById("luogo").value;
-    let provincia = document.getElementById("provincia").value;
-    let data = document.getElementById("data").value;
+    let cognome = document.getElementById("cognome").value.toUpperCase();
+    let nome = document.getElementById("nome").value.toUpperCase();
+    let luogo = document.getElementById("luogo").value.toUpperCase();
+    let provincia = document.getElementById("provincia").value.toUpperCase();
+    let data = document.getElementById("data").value.split("-");
+    let sesso = document.getElementById("sesso").value;
     
-    console.log(c_nome("antonio florin"));
+    console.log( c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2]) );
 }
 
 function consonante(ind,str){
     let quant = ind;
     let i = 0
     while(i<str.length){
-        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u" && str[i]!=" "){
+        if(str[i]!="A" && str[i]!="E" && str[i]!="I" && str[i]!="O" && str[i]!="U" && str[i]!=" "){
             quant-=1;
         }
         i++;
@@ -24,7 +25,7 @@ function consonante(ind,str){
 function conta_consonanti(str){
     let n = 0;
     for(let i = 0; i<str.length; i++){
-        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u" && str[i]!=" "){
+        if(str[i]!="A" && str[i]!="E" && str[i]!="I" && str[i]!="O" && str[i]!="U" && str[i]!=" "){
             n++;
         }
     }
@@ -35,7 +36,7 @@ function vocale(ind,str){
     let quant = ind;
     let i = 0
     while(i<str.length){
-        if(str[i]=="a" || str[i]=="e" || str[i]=="i" || str[i]=="o" || str[i]=="u"){
+        if(str[i]=="A" || str[i]=="E" || str[i]=="I" || str[i]=="O" || str[i]=="U"){
             quant-=1;
         }
         i++;
@@ -93,5 +94,21 @@ function c_nome(nome){
         r_nome += vocale(2,nome);
     }
     return r_nome;
+}
+
+function c_anno(anno){ //data indicata in questo modo come stringa: anno-mese-giorno
+    return anno[2] + anno[3];
+}
+
+function c_mese(mese){
+    let mesi = ["A","B","C","D","E","H","L","M","P","R","S","T"];
+    return mesi[parseInt(mese)-1];
+}
+
+function c_giorno(giorno,sesso){
+    if(sesso=="F"){
+        return parseInt(giorno) + 40;
+    }
+    return giorno;
 }
 
