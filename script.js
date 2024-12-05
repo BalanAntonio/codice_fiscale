@@ -5,14 +5,14 @@ function calcola(){
     let provincia = document.getElementById("provincia").value;
     let data = document.getElementById("data").value;
     
-    console.log(conta_consonanti("aeikksak"));
+    console.log(c_nome("antonio florin"));
 }
 
 function consonante(ind,str){
     let quant = ind;
     let i = 0
     while(i<str.length){
-        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u"){
+        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u" && str[i]!=" "){
             quant-=1;
         }
         i++;
@@ -24,7 +24,7 @@ function consonante(ind,str){
 function conta_consonanti(str){
     let n = 0;
     for(let i = 0; i<str.length; i++){
-        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u"){
+        if(str[i]!="a" && str[i]!="e" && str[i]!="i" && str[i]!="o" && str[i]!="u" && str[i]!=" "){
             n++;
         }
     }
@@ -66,5 +66,32 @@ function c_cognome(cognome){
         r_cognome += vocale(2,cognome);
     }
     return r_cognome;
+}
+
+function c_nome(nome){
+    if(conta_consonanti(nome)>3){
+        return consonante(1,nome) + consonante(3,nome) + consonante(4,nome)
+    }
+    let c1 = consonante(1,nome);
+    let c2 = consonante(2,nome);
+    let c3 = consonante(3,nome);
+    let r_nome = "";
+
+    r_nome+=c1;
+    if(c2!=-1){
+        r_nome+=c2;
+        if(c3!=-1){
+            r_nome+=c3
+        }else{
+            if(vocale(3,nome)!=-1){
+                r_nome += vocale(3,nome);
+            }else{
+                r_nome += "X"
+            }
+        }
+    }else{
+        r_nome += vocale(2,nome);
+    }
+    return r_nome;
 }
 
