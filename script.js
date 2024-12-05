@@ -6,7 +6,7 @@ function calcola(){
     let data = document.getElementById("data").value.split("-");
     let sesso = document.getElementById("sesso").value;
     
-    console.log( c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2]) );
+    console.log( c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2],sesso) );
 }
 
 function consonante(ind,str){
@@ -57,14 +57,19 @@ function c_cognome(cognome){
         if(c3!=-1){
             r_cognome+=c3
         }else{
-            if(vocale(3,cognome)!=-1){
-                r_cognome += vocale(3,cognome);
+            if(vocale(1,cognome)!=-1){
+                r_cognome += vocale(1,cognome);
             }else{
                 r_cognome += "X"
             }
         }
     }else{
-        r_cognome += vocale(2,cognome);
+        r_cognome += vocale(1,cognome);
+        if(vocale(2,cognome)==-1){
+            r_cognome+="X";
+        }else{
+            r_cognome+=vocale(2,cognome);
+        }
     }
     return r_cognome;
 }
@@ -84,14 +89,19 @@ function c_nome(nome){
         if(c3!=-1){
             r_nome+=c3
         }else{
-            if(vocale(3,nome)!=-1){
-                r_nome += vocale(3,nome);
+            if(vocale(1,nome)!=-1){
+                r_nome += vocale(1,nome);
             }else{
                 r_nome += "X"
             }
         }
     }else{
-        r_nome += vocale(2,nome);
+        r_nome += vocale(1,nome);
+        if(vocale(2,nome)==-1){
+            r_nome+="X";
+        }else{
+            r_nome+=vocale(2,nome);
+        }
     }
     return r_nome;
 }
@@ -111,4 +121,3 @@ function c_giorno(giorno,sesso){
     }
     return giorno;
 }
-
