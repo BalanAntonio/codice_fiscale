@@ -1,0 +1,26 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.9cm;
+}
+
+input{
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.6cm;
+}
+
+option{
+        text-transform: uppercase;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 0.6cm;
+}
+
+select{
+    text-transform: uppercase;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 0.6cm;
+}
+
+form{
+    text-align: center;
+}
