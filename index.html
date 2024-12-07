@@ -17,9 +17,6 @@
             <label for="luogo">LUOGO DI NASCITA</label> <br>
             <input type="text" id="luogo" required>
             <br>
-            <label for="provincia">PROVINCIA</label> <br>
-            <input type="text" id="provincia" required>
-            <br>
             <label for="sesso">SESSO: </label>
             <select name="" id="sesso">
                 <option value="M">M</option>
@@ -28,7 +25,10 @@
             <br>
             <input type="date" id="data" required>
             <br>
-            <input type="submit" id="invia" onclick="calcola()">
+            <input type="file" id="codici" value="File" onchange="prendi_codice(this)">
+            <input type="button" value="Invia" id="invia" onclick="calcola()">
         </form>
+
+        <div id="risultato"></div>
     </body>
 </html>

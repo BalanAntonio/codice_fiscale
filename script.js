@@ -1,12 +1,32 @@
+let cod = "";
+
 function calcola(){
     let cognome = document.getElementById("cognome").value.toUpperCase();
     let nome = document.getElementById("nome").value.toUpperCase();
     let luogo = document.getElementById("luogo").value.toUpperCase();
-    let provincia = document.getElementById("provincia").value.toUpperCase();
     let data = document.getElementById("data").value.split("-");
     let sesso = document.getElementById("sesso").value;
+    /*
+    let cognome = "BALAN";
+    let nome = "ANTONIO FLORIN";
+    let luogo = "VICENZA";
+    let data = ["2007","09","21"];
+    let sesso = "M";*/
+
+    let fin = document.getElementById("risultato");
+    let ris = "";
+    if(cognome && nome && luogo && data && sesso && valido(cognome) && valido(nome) && valido(luogo) && cod.indexOf(luogo)!=-1){
+        ris = c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2],sesso) + c_codici(cod,luogo);
+        ris += controllo(ris);
+        fin.innerHTML = ris;
+    }else{
+        alert("Inserire dei dati validi");
+        return;
+    }
+    //BLNNNF07P21L840N
     
-    console.log( c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2],sesso) );
+    
+    //console.log(c_codici(cod,'\nVICENZA'));
 }
 
 function consonante(ind,str){
@@ -120,4 +140,57 @@ function c_giorno(giorno,sesso){
         return parseInt(giorno) + 40;
     }
     return giorno;
+}
+
+function prendi_codice(codice){
+    let reader = new FileReader();
+    reader.readAsText(codice.files[0]);
+
+    reader.onload = function(){
+        cod = reader.result;
+        //console.log(cod);
+    }
+
+}
+
+function c_codici(tutto,inp){
+    let dove = tutto.indexOf("\n" + inp);
+    return tutto.slice(dove+inp.length+2,dove+inp.length+6)
+}
+
+function controllo(str){
+    let alf = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+    let tabella_d = [1,0,5,7,9,13,15,17,19,21,2,4,18,20,11,3,6,8,12,14,16,10,22,25,24,23];
+    let somma = 0;
+
+    for(let i = 0;i<15;i++){
+        if(i%2==1){
+            if(isNaN(parseInt(str[i]))){
+                somma+=alf.indexOf(str[i]);
+            }
+            else{
+                somma+=parseInt(str[i]);
+            }
+        }else{
+            if(isNaN(parseInt(str[i]))){
+                somma+=tabella_d[alf.indexOf(str[i])];
+            }
+            else{
+                somma+=tabella_d[parseInt(str[i])];
+            }
+        }
+    }
+
+    return alf[somma%26];
+    
+}
+
+function valido(str){
+    val = true
+    for(let i = 0; i<str.length;i++){
+        if(!isNaN(parseInt(str[i]))){
+            val = false;
+        }
+    }
+    return val;
 }
