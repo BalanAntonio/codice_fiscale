@@ -15,7 +15,8 @@ function calcola(){
 
     let fin = document.getElementById("risultato");
     let ris = "";
-    if(cognome && nome && luogo && data && sesso && valido(cognome) && valido(nome) && valido(luogo) && cod.indexOf(luogo)!=-1 && cognome.length > 1 && nome.length > 1){
+    if(cognome && nome && luogo && data && sesso && valido(cognome) && valido(nome) && valido(luogo) && cod.indexOf("\n" + luogo + ";")!=-1 && cognome.length > 1 && nome.length > 1){
+        cod.indexOf("ASD");
         ris = c_cognome(cognome) + c_nome(nome) + c_anno(data[0]) + c_mese(data[1]) + c_giorno(data[2],sesso) + c_codici(cod,luogo);
         ris += controllo(ris);
         fin.innerHTML = ris;
@@ -154,7 +155,7 @@ function prendi_codice(codice){
 }
 
 function c_codici(tutto,inp){
-    let dove = tutto.indexOf("\n" + inp);
+    let dove = tutto.indexOf("\n" + inp + ";");
     return tutto.slice(dove+inp.length+2,dove+inp.length+6)
 }
 
